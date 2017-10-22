@@ -33,18 +33,41 @@ public class FabricanteDAOTeste {
 		FabricanteDAO fabricanteDAO = new FabricanteDAO();
 		List<Fabricante> fabricantes = fabricanteDAO.listar();
 		
-		for(Fabricante fabricante:fabricantes){
-			System.out.println(fabricante.getDescricao());
-		}
+		System.out.println(fabricantes);
 	}
 	
 	@Test
+	@Ignore
 	public void buscarPorCodigo(){
 		
 		FabricanteDAO fabricanteDAO = new FabricanteDAO();
-		Fabricante f1 = fabricanteDAO.buscarPorCodigo(3L);
+		Fabricante f1 = fabricanteDAO.buscarPorCodigo(1L);
 		
 		System.out.println(f1.getDescricao());
+		
+	}
+	
+	
+	@Test
+	@Ignore
+	public void excluir(){
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		
+		Fabricante fabricante = fabricanteDAO.buscarPorCodigo(8L);
+		fabricanteDAO.excluir(fabricante);
+		
+	}
+	
+	
+	
+	@Test
+	
+	public void editar(){
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		Fabricante fabricante = new Fabricante();
+		fabricante = fabricanteDAO.buscarPorCodigo(2L);
+		fabricante.setDescricao("DESCRICAOX");
+		fabricanteDAO.editar(fabricante);
 		
 	}
 	

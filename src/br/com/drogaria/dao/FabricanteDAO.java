@@ -59,7 +59,7 @@ public class FabricanteDAO {
 			consulta = session.getNamedQuery("Fabricante.buscarPorCodigo");
 			consulta.setLong("codigo", codigo);
 			fabricante = (Fabricante) consulta.uniqueResult();
-			
+
 		} catch (RuntimeException e) {
 			throw e;
 		} finally {
@@ -67,14 +67,14 @@ public class FabricanteDAO {
 		}
 		return fabricante;
 	}
-	
-	public void salvar(Fabricante fabricante) {
+
+	public void excluir(Fabricante fabricante) {
 
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao = null;
 		try {
 			transacao = session.beginTransaction();
-			session.save(fabricante);
+			session.delete(fabricante);
 			transacao.commit();
 		} catch (Exception ex) {
 			if (transacao != null) {
@@ -87,4 +87,29 @@ public class FabricanteDAO {
 			session.close();
 		}
 	}
+
+	
+
+	public void editar(Fabricante fabricante) {
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao = null;
+		try {
+			transacao = session.beginTransaction();
+			Fabricante fabricanteEditar = buscarPorCodigo(fabricante.getCodigo());
+			fabricanteEditar.setDescricao(fabricante.getDescricao());
+			session.update(fabricanteEditar);
+			transacao.commit();
+		} catch (Exception ex) {
+			if (transacao != null) {
+				transacao.rollback();
+			}
+
+			throw ex;
+
+		} finally {
+			session.close();
+		}
+	}
+
 }
