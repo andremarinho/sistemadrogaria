@@ -50,4 +50,13 @@ public class ProdutoDAOTest {
 		Produto produto = produtoDAO.buscarPorCodigo(1L);
 		produtoDAO.excluir(produto);
 	}
+	
+	@Test
+	@Ignore
+	public void editar(){
+		ProdutoDAO produtoDAO = new ProdutoDAO();
+		Produto produto = produtoDAO.buscarPorCodigo(1L);
+		produto.setNome("Fanta");
+		produtoDAO.editar(produto);
+	}
 }

@@ -11,12 +11,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbl_venda")
+@NamedQueries({ 
+	@NamedQuery(name = "Venda.listar", query = "SELECT venda FROM Venda venda"),
+	@NamedQuery(name = "Venda.buscarPorCodigo", query = "SELECT venda FROM Venda venda WHERE codigo = :codigo")
+
+})
 public class Venda {
 
 	@Id
@@ -35,7 +42,6 @@ public class Venda {
 	@JoinColumn(name = "tbl_funcionarios_fun_codigo", referencedColumnName = "fun_codigo", nullable = false)
 	private Funcionario funcionario;
 
-	
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -67,7 +73,11 @@ public class Venda {
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Venda [codigo=" + codigo + ", horario=" + horario + ", valor=" + valor + ", funcionario=" + funcionario
+				+ "]";
+	}
 
 }
