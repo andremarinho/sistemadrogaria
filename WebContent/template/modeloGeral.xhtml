@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Drogaria</title>
+</h:head>
+<h:body>
+	<p:growl id="msgGlobal" />
+	<p:layout fullPage="true">
+		<p:layoutUnit header="Sistema para gerenciamento de drogarias"
+			position="north" resizable="false" closable="false" collapsed="false"></p:layoutUnit>
+		<p:layoutUnit header="Desenvolvido por: André Marinho"
+			position="south" resizable="false" closable="false" collapsed="false"></p:layoutUnit>
+		<p:layoutUnit size="250" position="west" resizable="false"
+			closable="false" collapsed="false">
+			<h:form>
+
+				<p:panelMenu>
+					<p:submenu label="Arquivo">
+						<p:menuitem value="Fornecedor"></p:menuitem>
+					</p:submenu>
+
+					<p:submenu label="Cadastro">
+						<p:menuitem value="Fabricante"
+							outcome="/pages/fabricantePesquisa.xhtml"></p:menuitem>
+						<p:menuitem value="Funcionario"
+							outcome="/pages/funcionarioPesquisa.xhtml"></p:menuitem>
+						<p:menuitem value="Produto"></p:menuitem>
+
+					</p:submenu>
+					<p:submenu label="Vendas"></p:submenu>
+					<p:submenu label="Sair">
+						<p:menuitem value="Sair"></p:menuitem>
+					</p:submenu>
+				</p:panelMenu>
+			</h:form>
+		</p:layoutUnit>
+		<p:layoutUnit position="center" resizable="false" closable="false"
+			collapsed="false">
+			<ui:insert name="conteudo" />
+		</p:layoutUnit>
+
+	</p:layout>
+</h:body>
+</html>

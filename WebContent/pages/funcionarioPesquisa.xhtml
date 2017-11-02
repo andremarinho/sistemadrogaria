@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/template/modeloGeral.xhtml">
+
+	<ui:define name="conteudo">
+
+		<h:form>
+
+			<p:toolbar>
+				<f:facet name="left">
+					<p:outputLabel value="Pesquisa de Funcionarios" />
+				</f:facet>
+
+			</p:toolbar>
+			<h:panelGrid columns="6">
+				<p:outputLabel value="Nome: "></p:outputLabel>
+				<p:inputText size="30" maxlength="50"></p:inputText>
+				<p:outputLabel value="CPF: "></p:outputLabel>
+				<p:inputMask mask="999.999.999-99" size="20"></p:inputMask>
+				<p:outputLabel value="Função: "></p:outputLabel>
+				<p:selectOneMenu>
+					<f:selectItem itemLabel="Escolha uma função"></f:selectItem>
+					<f:selectItem itemLabel="Administrador"></f:selectItem>
+					<f:selectItem itemLabel="Gerente"></f:selectItem>
+					<f:selectItem itemLabel="Balconista"></f:selectItem>
+					
+				</p:selectOneMenu>
+				
+			</h:panelGrid>
+			
+			
+			<h:panelGrid columns="2">
+				<p:commandButton value="Buscar"></p:commandButton>
+				<p:commandButton value="Novo"
+					action="/pages/funcionarioCadastro.xhtml?faces-redirect=true" />
+
+			</h:panelGrid>
+
+			<p:dataTable emptyMessage="Nenhum resgistro encontrado">
+
+				<p:column headerText="Código:">
+
+				</p:column>
+
+				<p:column headerText="Nome:">
+
+
+				</p:column>
+
+				<p:column headerText="CPF:">
+
+				</p:column>
+
+				<p:column headerText="Função:">
+
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+</html>
