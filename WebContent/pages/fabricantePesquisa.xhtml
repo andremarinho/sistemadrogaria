@@ -7,36 +7,55 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition template="/template/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{fabricanteBean.carregarPesquisa}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
 
 	<ui:define name="conteudo">
 
+
+
 		<h:form>
-		
-		<p:toolbar>
-			<f:facet name="left">
-				<p:outputLabel value="Fabricantes"/>
-			</f:facet>
-		
-		</p:toolbar>
-			<h:panelGrid columns="4">
-				<p:outputLabel value="Descrição: "></p:outputLabel>
-				<p:inputText size="30" maxlength="50"></p:inputText>
-				<p:commandButton value="Buscar"  ></p:commandButton>
-				<p:commandButton  value="Novo" action="/pages/fabricanteCadastro.xhtml?faces-redirect=true"   />
-			</h:panelGrid>
-			<p:dataTable emptyMessage="Nenhum resgistro encontrado">
+
+			<p:toolbar>
+				<f:facet name="left">
+					<p:outputLabel value="Fabricantes" />
+				</f:facet>
+
+			</p:toolbar>
+
+			<p:dataTable emptyMessage="Nenhum resgistro encontrado"
+				value="#{fabricanteBean.listaFabricante}"
+				filteredValue="#{fabricanteBean.listaFabricanteFiltrados}"
+				var="fabricante" rows="10" paginator="true">
+
+				<f:facet name="footer">
+					<p:commandButton value="Novo"
+						action="/pages/fabricanteCadastro.xhtml?faces-redirect=true" />
+				</f:facet>
 
 				<p:column headerText="Código:">
-
+					<h:outputLabel value="#{fabricante.codigo}" />
 				</p:column>
 
-				<p:column headerText="Descrição:">
-
+				<p:column headerText="Descrição:" filterBy="#{fabricante.descricao}"
+					sortBy="#{fabricante.descricao}">
+					<h:outputLabel value="#{fabricante.descricao}" />
 
 				</p:column>
 
 				<p:column headerText="Opções:">
-
+					<p:button value="Editar"
+						outcome="/pages/fabricanteCadastro.xhtml?faces-redirect=true">
+						<f:param name="fabcod" value="#{fabricante.codigo}" />
+					</p:button>
+					<p:button value="Excluir"
+						outcome="/pages/fabricanteCadastro.xhtml?faces-redirect=true">
+						<f:param name="fabcod" value="#{fabricante.codigo}"/>
+					</p:button>
 				</p:column>
 
 			</p:dataTable>

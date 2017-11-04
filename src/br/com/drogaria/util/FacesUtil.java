@@ -1,6 +1,9 @@
 package br.com.drogaria.util;
 
+import java.util.Map;
+
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 public class FacesUtil {
@@ -14,6 +17,17 @@ public class FacesUtil {
 	public static void adicionarMsgError(String mensagem){
 		FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, mensagem, mensagem);
 	}
+	
+	
+	public static String getParam(String nome){
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Map<String, String> parametro = externalContext.getRequestParameterMap();
+		String valor = parametro.get(nome);
+		return valor;
+	}
+	
+	
 	
 
 }
