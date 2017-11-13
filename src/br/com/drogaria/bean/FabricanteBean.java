@@ -18,6 +18,9 @@ public class FabricanteBean {
 	private List<Fabricante> listaFabricante;
 	private List<Fabricante> listaFabricanteFiltrados;
 
+	private String acao;
+	private Long codigo;
+
 	public Fabricante getFabricanteCadastro() {
 
 		return fabricanteCadastro;
@@ -43,6 +46,22 @@ public class FabricanteBean {
 		this.listaFabricanteFiltrados = listaFabricanteFiltrados;
 	}
 
+	public String getAcao() {
+		return acao;
+	}
+
+	public void setAcao(String acao) {
+		this.acao = acao;
+	}
+	
+	public Long getCodigo() {
+		return codigo;
+	}
+	
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+
 	public void carregarPesquisa() {
 		try {
 			FabricanteDAO fabricanteDAO = new FabricanteDAO();
@@ -54,15 +73,16 @@ public class FabricanteBean {
 
 	public void carregarFabricante() {
 		try {
+			
 
-			String valorRecebido = FacesUtil.getParam("fabcod");
-			if (valorRecebido != null) {
+			if (this.codigo != null) {
+
 				FabricanteDAO fabricanteDAO = new FabricanteDAO();
-				this.fabricanteCadastro = fabricanteDAO.buscarPorCodigo(Long.parseLong(valorRecebido));
+				this.fabricanteCadastro = fabricanteDAO.buscarPorCodigo(codigo);
 			} else {
-				
-					this.fabricanteCadastro = new Fabricante();
-				
+
+				this.fabricanteCadastro = new Fabricante();
+
 			}
 		} catch (Exception e) {
 			FacesUtil.adicionarMsgError("Não foi possivel carregar fabricante. " + e.getMessage());
@@ -90,11 +110,14 @@ public class FabricanteBean {
 		try {
 			FabricanteDAO fabricanteDAO = new FabricanteDAO();
 			fabricanteDAO.excluir(fabricanteCadastro);
-
+			this.fabricanteCadastro = new Fabricante();
 			FacesUtil.adicionarMsgInfo("Fabricante excluido com sucesso!!!");
+			this.codigo =null;
+			
 		} catch (Exception e) {
 
 			FacesUtil.adicionarMsgError("Falha na exclusao do fabricante. " + e.getMessage());
+			
 		}
 
 	}

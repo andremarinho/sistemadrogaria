@@ -1,5 +1,7 @@
 package br.com.drogaria.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -62,6 +64,24 @@ public class FuncionarioDAO {
 		}finally {
 			session.close();
 		}
+	}
+	
+	public List<Funcionario> listar(){
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query consulta;
+		List<Funcionario> funcionarios;
+		
+		try {
+			consulta = session.getNamedQuery("Funcionario.listar");
+			funcionarios = consulta.list();
+		} catch (Exception e) {
+			throw e;
+		}finally {
+			session.close();
+		}
+		
+		return funcionarios;
 	}
 	
 	public Funcionario buscarPorCodigo(Long codigo){

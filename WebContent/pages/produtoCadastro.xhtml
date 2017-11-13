@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/template/modeloGeral.xhtml">
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="procod" value="#{produtoBean.codigo}"></f:viewParam>
+			<f:viewParam name="proacao" value="#{produtoBean.acao}"></f:viewParam>
+			<f:event listener="#{produtoBean.carregarProduto}"
+				type="preRenderView"></f:event>
+
+		</f:metadata>
+
+	</ui:define>
+
+
+	<ui:define name="conteudo">
+		<h:form>
+
+			<p:toolbar>
+				<f:facet name="left">
+					<p:outputLabel value="Cadastro de Produto" />
+				</f:facet>
+
+			</p:toolbar>
+
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Código:" />
+				<p:inputText maxlength="20" size="20" value="" readonly="true" />
+				<p:outputLabel value="Descrição: " />
+
+				<p:inputText value="#{produtoBean.produtoCadastro.descricao}">
+					<f:validateBean />
+				</p:inputText>
+
+
+				<p:outputLabel value="Preço: "></p:outputLabel>
+
+				<p:inputText value="#{produtoBean.produtoCadastro.preco}">
+					<f:validateBean />
+				</p:inputText>
+
+				<p:outputLabel value="Quantidade: " />
+
+				<p:inputText value="#{produtoBean.produtoCadastro.quantidade}">
+					<f:validateBean />
+
+				</p:inputText>
+
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="3">
+				<p:commandButton value="Novo" />
+				<p:commandButton value="Salvar"
+					actionListener="#{produtoBean.salvar}" update=":msgGlobal"
+					rendered="#{produtoBean.acao =='salvar'}" />
+				<p:commandButton value="Editar"
+					actionListener="#{produtoBean.editar}" update=":msgGlobal"
+					rendered="#{produtoBean.acao=='editar'}" />
+
+				<p:commandButton value="Excluir"
+					actionListener="#{produtoBean.excluir}" update=":msgGlobal"
+					rendered="#{produtoBean.acao =='excluir'}" />
+
+				<p:button value="Voltar"
+					outcome="/pages/produtoPesquisa.xhtml?faces-redirect=true" />
+			</h:panelGrid>
+		</h:form>
+
+
+
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+</html>

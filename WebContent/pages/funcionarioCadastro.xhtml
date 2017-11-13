@@ -8,6 +8,19 @@
 
 <ui:composition template="/template/modeloGeral.xhtml">
 
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="funcod" value="#{funcionarioBean.codigo}"></f:viewParam>
+			<f:viewParam name="funacao" value="#{funcionarioBean.acao}"></f:viewParam>
+			<f:event listener="#{funcionarioBean.carregarFuncionario}"
+				type="preRenderView"></f:event>
+
+
+		</f:metadata>
+
+	</ui:define>
+
+
 	<ui:define name="conteudo">
 		<h:form>
 
@@ -21,32 +34,54 @@
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Código:" />
 				<p:inputText maxlength="20" size="20" value="" readonly="true" />
-				<p:outputLabel value="Descrição: " />
-				<p:inputText />
-				
-				
+				<p:outputLabel value="Nome: " />
+
+				<p:inputText value="#{funcionarioBean.funcionarioCadastro.nome}">
+					<f:validateBean />
+				</p:inputText>
+
+
 				<p:outputLabel value="CPF: "></p:outputLabel>
-				<p:inputMask mask="999.999.999-99" size="20"></p:inputMask>
-				<p:outputLabel value="Função: "></p:outputLabel>
-				<p:selectOneMenu>
-					<f:selectItem itemLabel="Escolha uma função"></f:selectItem>
-					<f:selectItem itemLabel="Administrador"></f:selectItem>
-					<f:selectItem itemLabel="Gerente"></f:selectItem>
-					<f:selectItem itemLabel="Balconista"></f:selectItem>
-					
+
+				<p:inputMask mask="999.999.999-99"
+					value="#{funcionarioBean.funcionarioCadastro.cpf}" size="20">
+					<f:validateBean />
+				</p:inputMask>
+
+				<p:outputLabel value="Função: " />
+
+				<p:selectOneMenu
+					value="#{funcionarioBean.funcionarioCadastro.funcao}">
+					<f:selectItem itemValue="" itemLabel="Escolha uma função"></f:selectItem>
+					<f:selectItem itemValue="Administrador" itemLabel="Administrador"></f:selectItem>
+					<f:selectItem itemValue="Gerente" itemLabel="Gerente"></f:selectItem>
+					<f:selectItem itemValue="Balconista" itemLabel="Balconista"></f:selectItem>
+					<f:validateBean />
 				</p:selectOneMenu>
-				
-				<p:outputLabel value="Senha:"></p:outputLabel>
-				<p:password maxlength="8" size="10"></p:password>
+
+				<p:outputLabel value="Senha:" />
+				<p:password maxlength="8" size="10"
+					value="#{funcionarioBean.funcionarioCadastro.senha}"
+					redisplay="true">
+					<f:validateBean />
+				</p:password>
 			</h:panelGrid>
 
 			<h:panelGrid columns="3">
 				<p:commandButton value="Novo" />
-				<p:commandButton value="Salvar" />
-				
-				
-				<p:commandButton value="Voltar"
-					action="/pages/funcionarioPesquisa.xhtml?faces-redirect=true" />
+				<p:commandButton value="Salvar"
+					actionListener="#{funcionarioBean.salvar}" update=":msgGlobal"
+					rendered="#{funcionarioBean.acao =='salvar'}" />
+				<p:commandButton value="Editar"
+					actionListener="#{funcionarioBean.editar}" update=":msgGlobal"
+					rendered="#{funcionarioBean.acao=='editar'}" />
+
+				<p:commandButton value="Excluir"
+					actionListener="#{funcionarioBean.excluir}" update=":msgGlobal"
+					rendered="#{funcionarioBean.acao =='excluir'}" />
+
+				<p:button value="Voltar"
+					outcome="/pages/funcionarioPesquisa.xhtml?faces-redirect=true" />
 			</h:panelGrid>
 		</h:form>
 

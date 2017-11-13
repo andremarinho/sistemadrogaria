@@ -33,8 +33,10 @@
 				var="fabricante" rows="10" paginator="true">
 
 				<f:facet name="footer">
-					<p:commandButton value="Novo"
-						action="/pages/fabricanteCadastro.xhtml?faces-redirect=true" />
+					<p:button value="Novo"
+						outcome="/pages/fabricanteCadastro.xhtml">
+						<f:param name="fabacao" value="novo" />
+					</p:button>
 				</f:facet>
 
 				<p:column headerText="Código:">
@@ -51,10 +53,12 @@
 					<p:button value="Editar"
 						outcome="/pages/fabricanteCadastro.xhtml?faces-redirect=true">
 						<f:param name="fabcod" value="#{fabricante.codigo}" />
+						<f:param name="fabacao" value="editar" />
 					</p:button>
 					<p:button value="Excluir"
 						outcome="/pages/fabricanteCadastro.xhtml?faces-redirect=true">
-						<f:param name="fabcod" value="#{fabricante.codigo}"/>
+						<f:param name="fabcod" value="#{fabricante.codigo}" />
+						<f:param name="fabacao" value="excluir" />
 					</p:button>
 				</p:column>
 

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/template/modeloGeral.xhtml">
+
+	<ui:define name="metadata">
+
+		<f:event listener="#{produtoBean.carregarPesquisa}"
+			type="preRenderView"></f:event>
+	</ui:define>
+	<ui:define name="conteudo">
+
+		<h:form>
+
+			<p:toolbar>
+				<f:facet name="left">
+					<p:outputLabel value="Pesquisa de Produtos" />
+				</f:facet>
+
+			</p:toolbar>
+			
+
+
+			<h:panelGrid columns="2">
+				<p:commandButton value="Buscar"></p:commandButton>
+				<p:button value="Novo"
+					outcome="/pages/produtoCadastro.xhtml?faces-redirect=true">
+
+					<f:param name="proacao" value="salvar"></f:param>
+				</p:button>
+
+			</h:panelGrid>
+
+			<p:dataTable emptyMessage="Nenhum resgistro encontrado"
+				value="#{produtoBean.listaProdutos}" var="produto">
+
+				<p:column headerText="Código:">
+					<p:outputLabel value="#{produto.codigo}"></p:outputLabel>
+				</p:column>
+
+				<p:column headerText="Descrição:" sortBy="#{produto.descricao}"
+					filterBy="#{produto.descricao}">
+					<p:outputLabel value="#{produto.descricao}"></p:outputLabel>
+
+				</p:column>
+
+				<p:column headerText="Preço:" filterBy="#{produto.preco}">
+					<p:outputLabel value="#{produto.preco}"></p:outputLabel>
+				</p:column>
+
+				<p:column headerText="Quantidade:" filterBy="#{produto.quantidade}">
+					<p:outputLabel value="#{produto.quantidade}"></p:outputLabel>
+				</p:column>
+
+				<p:column headerText="Opções:">
+					<p:button value="Editar"
+						outcome="/pages/produtoCadastro.xhtml?faces-redirect=true">
+						<f:param name="procod" value="#{produto.codigo}" />
+						<f:param name="proacao" value="editar" />
+					</p:button>
+					<p:button value="Excluir"
+						outcome="/pages/produtoCadastro.xhtml?faces-redirect=true">
+						<f:param name="procod" value="#{produto.codigo}" />
+						<f:param name="proacao" value="excluir" />
+					</p:button>
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+</html>

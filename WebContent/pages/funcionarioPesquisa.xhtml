@@ -8,6 +8,11 @@
 
 <ui:composition template="/template/modeloGeral.xhtml">
 
+	<ui:define name="metadata">
+
+		<f:event listener="#{funcionarioBean.carregarPesquisa}"
+			type="preRenderView"></f:event>
+	</ui:define>
 	<ui:define name="conteudo">
 
 		<h:form>
@@ -29,12 +34,12 @@
 					<f:selectItem itemLabel="Administrador"></f:selectItem>
 					<f:selectItem itemLabel="Gerente"></f:selectItem>
 					<f:selectItem itemLabel="Balconista"></f:selectItem>
-					
+
 				</p:selectOneMenu>
-				
+
 			</h:panelGrid>
-			
-			
+
+
 			<h:panelGrid columns="2">
 				<p:commandButton value="Buscar"></p:commandButton>
 				<p:commandButton value="Novo"
@@ -42,23 +47,38 @@
 
 			</h:panelGrid>
 
-			<p:dataTable emptyMessage="Nenhum resgistro encontrado">
+			<p:dataTable emptyMessage="Nenhum resgistro encontrado"
+				value="#{funcionarioBean.listaFuncionarios}" var="funcionario">
 
 				<p:column headerText="Código:">
+					<p:outputLabel value="#{funcionario.codigo}"></p:outputLabel>
+				</p:column>
+
+				<p:column headerText="Nome:" sortBy="#{funcionario.nome}"
+					filterBy="#{funcionario.nome}">
+					<p:outputLabel value="#{funcionario.nome}"></p:outputLabel>
 
 				</p:column>
 
-				<p:column headerText="Nome:">
-
-
+				<p:column headerText="CPF:" filterBy="#{funcionrio.cpf}">
+					<p:outputLabel value="#{funcionario.cpf}"></p:outputLabel>
 				</p:column>
 
-				<p:column headerText="CPF:">
-
+				<p:column headerText="Função:" filterBy="#{funcionario.funcao}">
+					<p:outputLabel value="#{funcionario.funcao}"></p:outputLabel>
 				</p:column>
 
-				<p:column headerText="Função:">
-
+				<p:column headerText="Opções:">
+					<p:button value="Editar"
+						outcome="/pages/funcionarioCadastro.xhtml?faces-redirect=true">
+						<f:param name="funcod" value="#{funcionario.codigo}" />
+						<f:param name="funacao" value="editar" />
+					</p:button>
+					<p:button value="Excluir"
+						outcome="/pages/funcionarioCadastro.xhtml?faces-redirect=true">
+						<f:param name="funcod" value="#{funcionario.codigo}" />
+						<f:param name="funacao" value="excluir" />
+					</p:button>
 				</p:column>
 
 			</p:dataTable>

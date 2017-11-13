@@ -9,6 +9,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.br.CPF;
+
 @Entity
 @Table(name = "tbl_funcionario")
 @NamedQueries({
@@ -24,15 +27,20 @@ public class Funcionario {
 	@Column(name = "fun_codigo")
 	private Long codigo;
 
+	@NotEmpty(message="O campo nome é requerido o preenchimento!")
 	@Column(name = "fun_nome", length = 50, nullable = false)
 	private String nome;
 
+	@NotEmpty(message="O CPF tem que ser preenchido.")
+	@CPF(message="O CPF digitado não é valido!")
 	@Column(name = "cpf", length = 14, nullable = false, unique = true)
 	private String cpf;
 
+	@NotEmpty(message="O campo senha é requerido o preenchimento!")
 	@Column(name = "fun_senha", length = 32, nullable = false)
 	private String senha;
 
+	@NotEmpty(message="O campo funcao é requerido o preenchimento!")
 	@Column(name = "fun_funcao", length = 50, nullable = false)
 	private String funcao;
 
