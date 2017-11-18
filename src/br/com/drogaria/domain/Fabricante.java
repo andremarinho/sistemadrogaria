@@ -11,7 +11,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @Table(name = "tbl_fabricante")
@@ -31,18 +30,11 @@ public class Fabricante {
 	@Column(name = "fab_descricao", length = 50, nullable = false)
 	private String descricao;
 
-	@CPF(message="O CPF informado é invalido!")
-	@Column(name = "fun_cpf", length = 14, nullable = false, unique = true)
-	private String cpf;
+	
 
-	@NotEmpty(message = "O campo senha é obrigatorio!")
-	@Size(min = 6, max = 8, message = "Tamanho invalido para campo senha, tem que ser de 6 a 8.")
-	@Column(name = "fun_senha", length = 32, nullable = false)
-	private String senha;
+	
 
-	@NotEmpty(message = "O campo função é obrigatorio!")
-	@Column(name = "fun_funcao", length = 50, nullable = false)
-	private String funcao;
+	
 
 	public Long getCodigo() {
 		return codigo;
@@ -59,36 +51,42 @@ public class Fabricante {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public String getFuncao() {
-		return funcao;
-	}
-
-	public void setFuncao(String funcao) {
-		this.funcao = funcao;
-	}
 
 	@Override
 	public String toString() {
 		return "Fabricante [codigo=" + codigo + ", descricao=" + descricao + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Fabricante other = (Fabricante) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
+
+	
+	
+	
+
+	
+	
 
 }

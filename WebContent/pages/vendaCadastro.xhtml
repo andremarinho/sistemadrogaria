@@ -7,37 +7,29 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition template="/template/modeloGeral.xhtml">
-
 	<ui:define name="metadata">
-
-		<f:event listener="#{produtoBean.carregarPesquisa}"
-			type="preRenderView"></f:event>
+		<f:metadata>
+			<f:event listener="#{vendaBean.carregarProdutos}"
+				type="preRenderView"></f:event>
+		</f:metadata>
 	</ui:define>
 	<ui:define name="conteudo">
 
+
+
+		<p:toolbar>
+			<f:facet name="left">
+				<p:outputLabel value="Vendas" />
+			</f:facet>
+
+		</p:toolbar>
+		<p:separator></p:separator>
+
 		<h:form>
-
-			<p:toolbar>
-				<f:facet name="left">
-					<p:outputLabel value="Pesquisa de Produtos" />
-				</f:facet>
-
-			</p:toolbar>
-
-
-
-			<h:panelGrid columns="2">
-				<p:commandButton value="Buscar"></p:commandButton>
-				<p:button value="Novo"
-					outcome="/pages/produtoCadastro.xhtml?faces-redirect=true">
-
-					<f:param name="proacao" value="salvar"></f:param>
-				</p:button>
-
-			</h:panelGrid>
-
 			<p:dataTable emptyMessage="Nenhum resgistro encontrado"
-				value="#{produtoBean.listaProdutos}" var="produto" filteredValue="#{produtoBean.listaProdutosFiltrados}">
+				value="#{vendaBean.listaProdutos}" var="produto"
+				filteredValue="#{vendaBean.listaProdutosFiltrados}" rows="4"
+				paginator="true">
 
 				<p:column headerText="Código:" style="width:7%;">
 					<p:outputLabel value="#{produto.codigo}"></p:outputLabel>
@@ -65,16 +57,38 @@
 				</p:column>
 
 				<p:column style="width: 15%;" headerText="Opções:">
-					<p:button value="Editar"
-						outcome="/pages/produtoCadastro.xhtml?faces-redirect=true">
-						<f:param name="procod" value="#{produto.codigo}" />
-						<f:param name="proacao" value="editar" />
-					</p:button>
-					<p:button value="Excluir"
-						outcome="/pages/produtoCadastro.xhtml?faces-redirect=true">
-						<f:param name="procod" value="#{produto.codigo}" />
-						<f:param name="proacao" value="excluir" />
-					</p:button>
+					<p:commandButton value="Adcionar"
+						actionListener="#{vendaBean.selecionar(produto)}" update=":fr_selecionados"></p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+
+		<p:separator></p:separator>
+
+		<h:form id="fr_selecionados">
+			<p:dataTable emptyMessage="Nenhum resgistro encontrado"
+				value="#{vendaBean.listaItens}" var="item" rows="4" paginator="true">
+
+				<p:column headerText="Produto:">
+					<p:outputLabel value="#{item.produto.descricao}"></p:outputLabel>
+				</p:column>
+
+				<p:column headerText="Quantidade:">
+					<p:outputLabel value="#{item.quantidade}"></p:outputLabel>
+
+				</p:column>
+
+				<p:column headerText="Valor Parcial:">
+					<p:outputLabel value="#{item.valor}"></p:outputLabel>
+				</p:column>
+
+
+
+				<p:column style="width: 15%;" headerText="Opções:">
+					<p:commandButton value="Adcionar"></p:commandButton>
 				</p:column>
 
 			</p:dataTable>
@@ -83,8 +97,11 @@
 
 
 
-
 	</ui:define>
+
+
+
+
 
 </ui:composition>
 

@@ -52,6 +52,7 @@ public class Produto {
 	@Column(name = "pro_quantidade", nullable = false)
 	private Integer quantidade;
 
+	@NotNull(message="O preenchimento campo fabricante é obrigatorio.")
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tbl_fabricante_fab_cod", referencedColumnName = "fab_codigo")
 	private Fabricante fabricante;

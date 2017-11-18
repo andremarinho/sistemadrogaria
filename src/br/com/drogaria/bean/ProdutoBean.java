@@ -5,7 +5,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.drogaria.dao.FabricanteDAO;
 import br.com.drogaria.dao.ProdutoDAO;
+import br.com.drogaria.domain.Fabricante;
 import br.com.drogaria.domain.Produto;
 import br.com.drogaria.util.FacesUtil;
 
@@ -21,6 +23,8 @@ public class ProdutoBean {
 	private List<Produto> listaProdutos;
 	private List<Produto> listaProdutosFiltrados;
 	
+	private List<Fabricante> listaFabricantes;
+	
 	public List<Produto> getListaProdutos() {
 		return listaProdutos;
 	}
@@ -35,6 +39,14 @@ public class ProdutoBean {
 	
 	public void setListaProdutosFiltrados(List<Produto> listaProdutosFiltrados) {
 		this.listaProdutosFiltrados = listaProdutosFiltrados;
+	}
+	
+	public List<Fabricante> getListaFabricantes() {
+		return listaFabricantes;
+	}
+	
+	public void setListaFabricantes(List<Fabricante> listaFabricantes) {
+		this.listaFabricantes = listaFabricantes;
 	}
 	
 	
@@ -80,6 +92,9 @@ public class ProdutoBean {
 				}else{
 					this.produtoCadastro = new Produto();
 				}
+			
+			FabricanteDAO fabricanteDAO = new FabricanteDAO();
+			this.listaFabricantes = fabricanteDAO.listar();
 				
 			}catch (Exception e) {
 				FacesUtil.adicionarMsgError("Não possivel carregar o produto.");

@@ -53,6 +53,16 @@
 
 				</p:inputText>
 
+				<p:outputLabel value="Fabricante: " />
+
+				<p:selectOneMenu value="#{produtoBean.produtoCadastro.fabricante}" converter="fabricanteConverter">
+
+					<f:selectItem itemValue="" itemLabel="Selecione um fabricante"></f:selectItem>
+					<f:selectItems value="#{produtoBean.listaFabricantes}"
+						var="fabricante" itemLabel="#{fabricante.descricao}"></f:selectItems>
+						<f:validateBean/>
+				</p:selectOneMenu>
+
 
 			</h:panelGrid>
 
