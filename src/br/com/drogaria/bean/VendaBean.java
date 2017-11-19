@@ -80,13 +80,30 @@ public class VendaBean {
 			item.setValor(produto.getPreco());
 			listaItens.add(item);
 
-		}else{
+		} else {
 			Item itemEncontrado = this.listaItens.get(posicaoEncontrada);
-			item.setQuantidade(itemEncontrado.getQuantidade()+1);
+			item.setQuantidade(itemEncontrado.getQuantidade() + 1);
 			item.setValor(produto.getPreco().multiply(new BigDecimal(item.getQuantidade())));
 			listaItens.set(posicaoEncontrada, item);
 		}
 
+	}
+
+	public void remover(Item item) {
+		int posicaoEncontrada = -1;
+
+		for (int pos = 0; pos < this.listaItens.size() && posicaoEncontrada < 0; pos++) {
+
+			Item itemTemp = this.listaItens.get(pos);
+
+			if (itemTemp.getProduto().equals(item.getProduto())) {
+				posicaoEncontrada = pos;
+			}
+		}
+
+		if (posicaoEncontrada > -1) {
+			listaItens.remove(posicaoEncontrada);
+		}
 	}
 
 }

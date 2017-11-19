@@ -58,7 +58,8 @@
 
 				<p:column style="width: 15%;" headerText="Opções:">
 					<p:commandButton value="Adcionar"
-						actionListener="#{vendaBean.selecionar(produto)}" update=":fr_selecionados"></p:commandButton>
+						actionListener="#{vendaBean.selecionar(produto)}"
+						update=":fr_selecionados"></p:commandButton>
 				</p:column>
 
 			</p:dataTable>
@@ -88,7 +89,9 @@
 
 
 				<p:column style="width: 15%;" headerText="Opções:">
-					<p:commandButton value="Adcionar"></p:commandButton>
+					<p:commandButton value="Remover"
+						actionListener="#{vendaBean.remover(item)}"
+						update="fr_selecionados"></p:commandButton>
 				</p:column>
 
 			</p:dataTable>
