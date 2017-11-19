@@ -1,5 +1,6 @@
 package br.com.drogaria.bean;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,23 +18,22 @@ public class VendaBean {
 
 	private List<Produto> listaProdutos;
 	private List<Produto> listaProdutosFiltrados;
-	
+
 	private List<Item> listaItens;
-	
-	
+
 	public List<Item> getListaItens() {
 		return listaItens;
 	}
-	
+
 	public void setListaItens(List<Item> listaItens) {
 		this.listaItens = listaItens;
 	}
 
 	public List<Produto> getListaProdutos() {
-		if(listaItens == null){
+		if (listaItens == null) {
 			this.listaItens = new ArrayList<>();
 		}
-		
+
 		return listaProdutos;
 	}
 
@@ -58,16 +58,35 @@ public class VendaBean {
 		}
 
 	}
-	
-	
-	public void selecionar(Produto produto){
+
+	public void selecionar(Produto produto) {
+
+		int posicaoEncontrada = -1;
+
+		for (int pos = 0; pos < this.listaItens.size() && posicaoEncontrada < 0; pos++) {
+
+			Item itemTemp = this.listaItens.get(pos);
+
+			if (itemTemp.getProduto().equals(produto)) {
+				posicaoEncontrada = pos;
+			}
+		}
+
 		Item item = new Item();
 		item.setProduto(produto);
-		item.setQuantidade(1);
-		item.setValor(produto.getPreco());
-		
-		listaItens.add(item);
-		
+
+		if (posicaoEncontrada < 0) {
+			item.setQuantidade(1);
+			item.setValor(produto.getPreco());
+			listaItens.add(item);
+
+		}else{
+			Item itemEncontrado = this.listaItens.get(posicaoEncontrada);
+			item.setQuantidade(itemEncontrado.getQuantidade()+1);
+			item.setValor(produto.getPreco().multiply(new BigDecimal(item.getQuantidade())));
+			listaItens.set(posicaoEncontrada, item);
+		}
+
 	}
 
 }
