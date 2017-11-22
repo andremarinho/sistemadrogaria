@@ -59,7 +59,7 @@
 				<p:column style="width: 15%;" headerText="Opções:">
 					<p:commandButton value="Adcionar"
 						actionListener="#{vendaBean.selecionar(produto)}"
-						update=":fr_selecionados"></p:commandButton>
+						update=":fr_selecionados :txt_total"></p:commandButton>
 				</p:column>
 
 			</p:dataTable>
@@ -91,13 +91,51 @@
 				<p:column style="width: 15%;" headerText="Opções:">
 					<p:commandButton value="Remover"
 						actionListener="#{vendaBean.remover(item)}"
-						update="fr_selecionados"></p:commandButton>
+						update=":fr_selecionados :txt_total"></p:commandButton>
 				</p:column>
 
 			</p:dataTable>
 
+			<p:separator></p:separator>
+
+
+
 		</h:form>
 
+		<p:dialog closable="true" draggable="true" modal="false"
+			resizable="false" header="Finalização da Venda"
+			widgetVar="wvdlgFinalizarVenda">
+
+			<h:form>
+				<h:panelGrid>
+
+					<h:outputText value="Horário: " />
+					<h:outputText value="Funcionario: " />
+					<h:outputText value="Valor Total: " />
+				</h:panelGrid>
+
+
+			</h:form>
+
+		</p:dialog>
+
+
+
+
+
+		<h:panelGrid columns="1">
+			<h:outputText id="txt_total"
+				value="Valor Total: #{vendaBean.vendaCadastro.valor} " />
+
+			<p:commandButton type="button" value="Finalizar Venda"
+				onclick="PF('wvdlgFinalizarVenda').show();" />
+
+		</h:panelGrid>
+
+
+		
+
+		
 
 
 	</ui:define>
