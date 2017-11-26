@@ -2,12 +2,17 @@ package br.com.drogaria.bean;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.context.RequestContext;
+
+import br.com.drogaria.dao.FuncionarioDAO;
 import br.com.drogaria.dao.ProdutoDAO;
+import br.com.drogaria.domain.Funcionario;
 import br.com.drogaria.domain.Item;
 import br.com.drogaria.domain.Produto;
 import br.com.drogaria.domain.Venda;
@@ -19,6 +24,7 @@ public class VendaBean {
 
 	private Venda vendaCadastro;
 	
+	
 	private List<Produto> listaProdutos;
 	private List<Produto> listaProdutosFiltrados;
 
@@ -27,6 +33,11 @@ public class VendaBean {
 	public List<Item> getListaItens() {
 		return listaItens;
 	}
+	
+	
+
+	
+
 
 	public void setListaItens(List<Item> listaItens) {
 		this.listaItens = listaItens;
@@ -125,6 +136,17 @@ public class VendaBean {
 			listaItens.remove(posicaoEncontrada);
 			
 		}
+	}
+	
+	public void carregarDadosVenda(){
+		vendaCadastro.setHorario(new Date());
+		
+		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+		this.vendaCadastro.setFuncionario(funcionarioDAO.buscarPorCodigo(1L)); 
+		
+		RequestContext req = RequestContext.getCurrentInstance();
+		req.execute("PF('wvdlgFinalizarVenda').show();");
+		
 	}
 
 }

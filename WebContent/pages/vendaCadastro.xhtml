@@ -101,41 +101,70 @@
 
 
 		</h:form>
-
 		<p:dialog closable="true" draggable="true" modal="false"
 			resizable="false" header="Finalização da Venda"
 			widgetVar="wvdlgFinalizarVenda">
 
 			<h:form>
-				<h:panelGrid>
+				<h:panelGrid columns="2">
 
 					<h:outputText value="Horário: " />
+					<h:outputText id="dlgFinalizar" value="" />
 					<h:outputText value="Funcionario: " />
 					<h:outputText value="Valor Total: " />
 				</h:panelGrid>
-
-
 			</h:form>
+		</p:dialog>
 
+
+		<h:panelGrid columns="1">
+
+
+			<p:dialog closable="true" draggable="true" modal="false"
+				resizable="false" header="Finalização da Venda"
+				widgetVar="wvdlgFinalizarVenda">
+
+				<h:form id="fr_finalizar">
+					<h:panelGrid columns="2">
+
+						<h:outputText value="Horário: " />
+						<h:outputText id="dlgFinalizar"
+							value="#{vendaBean.vendaCadastro.horario}" >
+							
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Maceio"/>
+							</h:outputText>
+						<h:outputText value="Funcionario: " />
+						<h:outputText value="#{vendaBean.vendaCadastro.funcionario.nome}" />
+						<h:outputText value="Valor Total:  " />
+						<h:outputText value="#{vendaBean.vendaCadastro.valor}" />
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+
+
+			<h:outputText id="txt_total"
+				value="Valor Total: #{vendaBean.vendaCadastro.valor}" />
+
+			<p:commandButton  value="Finalizar Venda"
+				actionListener="#{vendaBean.carregarDadosVenda}"  update=":fr_finalizar" />
+
+			<p:commandButton value="Basic" type="button"
+				oncomplete="PF('wvdlgFinalizarVenda').show();" />
+
+		</h:panelGrid>
+
+
+
+		<p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+			<h:outputText value="Resistance to PrimeFaces is futile!" />
 		</p:dialog>
 
 
 
 
 
-		<h:panelGrid columns="1">
-			<h:outputText id="txt_total"
-				value="Valor Total: #{vendaBean.vendaCadastro.valor} " />
-
-			<p:commandButton type="button" value="Finalizar Venda"
-				onclick="PF('wvdlgFinalizarVenda').show();" />
-
-		</h:panelGrid>
 
 
-		
-
-		
 
 
 	</ui:define>
