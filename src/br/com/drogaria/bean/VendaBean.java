@@ -11,7 +11,9 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.context.RequestContext;
 
 import br.com.drogaria.dao.FuncionarioDAO;
+import br.com.drogaria.dao.ItemDAO;
 import br.com.drogaria.dao.ProdutoDAO;
+import br.com.drogaria.dao.VendaDAO;
 import br.com.drogaria.domain.Funcionario;
 import br.com.drogaria.domain.Item;
 import br.com.drogaria.domain.Produto;
@@ -147,6 +149,28 @@ public class VendaBean {
 		RequestContext req = RequestContext.getCurrentInstance();
 		req.execute("PF('wvdlgFinalizarVenda').show();");
 		
+	}
+	
+	public void salvar(){
+	try {
+	VendaDAO vendaDAO = new VendaDAO();
+	Long codigoVenda = vendaDAO.salvar(vendaCadastro);
+	Venda vendaFK = vendaDAO.buscarPorCodigo(codigoVenda);
+	
+	for(Item item:listaItens){
+		item.setVenda(vendaFK);
+		ItemDAO itemDAO  = new ItemDAO();
+		itemDAO.salvar(item);
+	}
+		
+	vendaCadastro = new Venda();
+	vendaCadastro.setValor(new BigDecimal("0.00"));
+	this.listaItens.clear();
+	
+	FacesUtil.adicionarMsgInfo("Venda salva com sucesso!!!");
+	} catch (Exception e) {
+		FacesUtil.adicionarMsgError("Não foi possivel salvar a venda " + e.getMessage());
+	}
 	}
 
 }

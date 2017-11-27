@@ -129,14 +129,19 @@
 
 						<h:outputText value="Horário: " />
 						<h:outputText id="dlgFinalizar"
-							value="#{vendaBean.vendaCadastro.horario}" >
-							
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Maceio"/>
-							</h:outputText>
+							value="#{vendaBean.vendaCadastro.horario}">
+
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+								timeZone="America/Maceio" />
+						</h:outputText>
 						<h:outputText value="Funcionario: " />
 						<h:outputText value="#{vendaBean.vendaCadastro.funcionario.nome}" />
 						<h:outputText value="Valor Total:  " />
 						<h:outputText value="#{vendaBean.vendaCadastro.valor}" />
+						<p:commandButton value="Voltar" />
+						<p:commandButton value="Salvar"
+							actionListener="#{vendaBean.salvar}" update=":msgGlobal :fr_selecionados :txt_total"
+							oncomplete="PF('wvdlgFinalizarVenda').hide();" />
 					</h:panelGrid>
 				</h:form>
 			</p:dialog>
@@ -145,19 +150,14 @@
 			<h:outputText id="txt_total"
 				value="Valor Total: #{vendaBean.vendaCadastro.valor}" />
 
-			<p:commandButton  value="Finalizar Venda"
-				actionListener="#{vendaBean.carregarDadosVenda}"  update=":fr_finalizar" />
 
-			<p:commandButton value="Basic" type="button"
-				oncomplete="PF('wvdlgFinalizarVenda').show();" />
-
+			<p:commandButton value="Finalizar Venda"
+				actionListener="#{vendaBean.carregarDadosVenda}"
+				update=":fr_finalizar" />
 		</h:panelGrid>
 
 
 
-		<p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
-			<h:outputText value="Resistance to PrimeFaces is futile!" />
-		</p:dialog>
 
 
 
