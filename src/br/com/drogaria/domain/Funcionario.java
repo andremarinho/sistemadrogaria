@@ -16,7 +16,8 @@ import org.hibernate.validator.constraints.br.CPF;
 @Table(name = "tbl_funcionario")
 @NamedQueries({
 	@NamedQuery(name="Funcionario.listar", query="SELECT funcionario FROM Funcionario funcionario"),
-	@NamedQuery(name="Funcionario.buscarPorCodigo", query="SELECT funcionario FROM Funcionario funcionario WHERE codigo = :codigo")
+	@NamedQuery(name="Funcionario.buscarPorCodigo", query="SELECT funcionario FROM Funcionario funcionario WHERE codigo = :codigo"),
+	@NamedQuery(name="Funcionario.autenticar", query="SELECT  funcionario  FROM Funcionario funcionario WHERE funcionario.cpf = :cpf AND funcionario.senha = :senha")
 	
 })
 
