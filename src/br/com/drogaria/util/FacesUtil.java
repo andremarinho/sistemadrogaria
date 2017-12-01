@@ -16,6 +16,8 @@ public class FacesUtil {
 	
 	public static void adicionarMsgError(String mensagem){
 		FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, mensagem, mensagem);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.addMessage(null, facesMessage);
 	}
 	
 	

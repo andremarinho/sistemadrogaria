@@ -42,8 +42,12 @@
 
 			<h:panelGrid columns="2">
 				<p:commandButton value="Buscar"></p:commandButton>
-				<p:commandButton value="Novo"
-					action="/pages/funcionarioCadastro.xhtml?faces-redirect=true" />
+				<p:button value="Novo"
+					outcome="/pages/funcionarioCadastro.xhtml?faces-redirect=true" >
+					
+					<f:param name="funacao" value="salvar"></f:param>
+					
+					</p:button>
 
 			</h:panelGrid>
 
