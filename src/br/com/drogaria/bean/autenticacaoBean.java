@@ -60,4 +60,10 @@ public class autenticacaoBean {
 			FacesUtil.adicionarMsgError("Erro ao tentar autenticar no sistema. " + e.getMessage());
 		}
 	}
+	
+	public String sair(){
+		this.funcionarioLogado = null;
+		
+		return "/pages/autenticacao.xhtml?faces-redirect=true";
+	}
 }

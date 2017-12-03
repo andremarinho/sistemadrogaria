@@ -33,7 +33,7 @@
 					
 					<p:submenu label="Arquivo" >
 						<p:menuitem value="Principal" outcome="/pages/principal.xhtml" rendered="#{autenticacaoBean.funcionarioLogado.funcao != null}"/>
-						<p:menuitem value="Sair" rendered="#{autenticacaoBean.funcionarioLogado.funcao != null}"/>
+						<p:menuitem value="Sair" rendered="#{autenticacaoBean.funcionarioLogado.funcao != null}" action="#{autenticacaoBean.sair}"/>
 						<p:menuitem value="Autenticação" outcome="/pages/autenticacao.xhtml" rendered="#{autenticacaoBean.funcionarioLogado.funcao == null}" />
 					</p:submenu>
 
