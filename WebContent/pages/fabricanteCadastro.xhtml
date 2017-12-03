@@ -35,23 +35,24 @@
 				<p:inputText id="lb_desc"
 					value="#{fabricanteBean.fabricanteCadastro.descricao}"
 					readonly="#{fabricanteBean.acao =='excluir'}">
-					<f:validateBean/>
+					<f:validateBean />
 				</p:inputText>
 			</h:panelGrid>
 
 			<h:panelGrid columns="5">
-				<p:commandButton rendered="#{fabricanteBean.acao == 'novo'}"
+				<p:commandButton
+					rendered="#{fabricanteBean.acao == 'novo' and autenticacaoBean.funcionarioLogado.funcao != 'Balconista'}"
 					value="Novo" actionListener="#{fabricanteBean.novo}"
 					update=":frmFabCad:pnlFabCadDados" />
-				<p:commandButton rendered="#{fabricanteBean.acao == 'novo'}"
+				<p:commandButton rendered="#{fabricanteBean.acao == 'novo' and autenticacaoBean.funcionarioLogado.funcao != 'Balconista'}"
 					value="Salvar" actionListener="#{fabricanteBean.salvar}"
 					update=":msgGlobal :frmFabCad:pnlFabCadDados" />
 				<p:button value="Voltar"
 					outcome="/pages/fabricantePesquisa.xhtml?faces-redirect=true" />
-				<p:commandButton rendered="#{fabricanteBean.acao == 'excluir'}"
+				<p:commandButton rendered="#{fabricanteBean.acao == 'excluir' and autenticacaoBean.funcionarioLogado.funcao != 'Balconista'}"
 					value="Excluir" actionListener="#{fabricanteBean.excluir}"
 					update=":msgGlobal" />
-				<p:commandButton rendered="#{fabricanteBean.acao == 'editar'}"
+				<p:commandButton rendered="#{fabricanteBean.acao == 'editar' and autenticacaoBean.funcionarioLogado.funcao != 'Balconista'}"
 					value="Editar" actionListener="#{fabricanteBean.editar}"
 					update=":msgGlobal" />
 
