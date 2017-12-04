@@ -5,6 +5,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import br.com.drogaria.dao.FabricanteDAO;
 import br.com.drogaria.dao.FuncionarioDAO;
 import br.com.drogaria.domain.Fabricante;
@@ -16,53 +18,58 @@ import br.com.drogaria.util.FacesUtil;
 public class FuncionarioBean {
 
 	private Funcionario funcionarioCadastro = new Funcionario();
-	
+
 	private List<Funcionario> listaFuncionarios;
 	private List<Funcionario> listaFuncionariosFiltrados;
-	
+
 	private String acao;
 	private Long codigo;
-	
+
 	public Funcionario getFuncionarioCadastro() {
 		return funcionarioCadastro;
 	}
+
 	public void setFuncionarioCadastro(Funcionario funcionarioCadastro) {
 		this.funcionarioCadastro = funcionarioCadastro;
 	}
-	
-	
+
 	public List<Funcionario> getListaFuncionarios() {
 		return listaFuncionarios;
 	}
+
 	public void setListaFuncionarios(List<Funcionario> listaFuncionarios) {
 		this.listaFuncionarios = listaFuncionarios;
 	}
+
 	public List<Funcionario> getListaFuncionariosFiltrados() {
 		return listaFuncionariosFiltrados;
 	}
+
 	public void setListaFuncionariosFiltrados(List<Funcionario> listaFuncionariosFiltrados) {
 		this.listaFuncionariosFiltrados = listaFuncionariosFiltrados;
 	}
+
 	public String getAcao() {
 		return acao;
 	}
+
 	public void setAcao(String acao) {
 		this.acao = acao;
 	}
+
 	public Long getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
-	
-	
-	
+
 	public void carregarPesquisa() {
 		try {
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 			this.listaFuncionarios = funcionarioDAO.listar();
-			
+
 		} catch (Exception e) {
 			FacesUtil.adicionarMsgError("Error ao tentar carregar pesquisa. " + e.getMessage());
 		}
@@ -70,7 +77,6 @@ public class FuncionarioBean {
 
 	public void carregarFuncionario() {
 		try {
-			
 
 			if (this.codigo != null) {
 
@@ -93,6 +99,7 @@ public class FuncionarioBean {
 	public void salvar() {
 		try {
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+			funcionarioCadastro.setSenha(DigestUtils.md5Hex(funcionarioCadastro.getSenha()));
 			funcionarioDAO.salvar(funcionarioCadastro);
 			funcionarioCadastro = new Funcionario();
 			FacesUtil.adicionarMsgInfo("Funcionario salvo com sucesso!!!");
@@ -109,12 +116,12 @@ public class FuncionarioBean {
 			funcionarioDAO.excluir(funcionarioCadastro);
 			this.funcionarioCadastro = new Funcionario();
 			FacesUtil.adicionarMsgInfo("Funcionario excluido com sucesso!!!");
-			this.codigo =null;
-			
+			this.codigo = null;
+
 		} catch (Exception e) {
 
 			FacesUtil.adicionarMsgError("Falha na exclusao do funcionario. " + e.getMessage());
-			
+
 		}
 
 	}
@@ -122,7 +129,7 @@ public class FuncionarioBean {
 	public void editar() {
 		try {
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-
+			funcionarioCadastro.setSenha(DigestUtils.md5Hex(funcionarioCadastro.getSenha()));
 			funcionarioDAO.editar(funcionarioCadastro);
 
 			FacesUtil.adicionarMsgInfo("Funcionario editado com sucesso!!!");
@@ -133,6 +140,4 @@ public class FuncionarioBean {
 
 	}
 
-	
-	
 }

@@ -3,6 +3,8 @@ package br.com.drogaria.bean;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import br.com.drogaria.dao.FuncionarioDAO;
 import br.com.drogaria.domain.Funcionario;
 import br.com.drogaria.util.FacesUtil;
@@ -43,7 +45,7 @@ public class autenticacaoBean {
 
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 			this.funcionarioLogado = funcionarioDAO.autenticar(funcionarioLogado.getCpf(),
-					funcionarioLogado.getSenha());
+					DigestUtils.md5Hex(funcionarioLogado.getSenha()));
 			
 			if (funcionarioLogado.getFuncao() == null) {
 				FacesUtil.adicionarMsgError("Credenciais incorretas");
