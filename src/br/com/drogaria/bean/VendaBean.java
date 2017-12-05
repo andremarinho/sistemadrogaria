@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import org.primefaces.context.RequestContext;
@@ -25,8 +26,10 @@ import br.com.drogaria.util.FacesUtil;
 public class VendaBean {
 
 	private Venda vendaCadastro;
-	
-	
+
+	@ManagedProperty(value = "#{autenticacaoBean}")
+	private autenticacaoBean autenticacaoBean;
+
 	private List<Produto> listaProdutos;
 	private List<Produto> listaProdutosFiltrados;
 
@@ -35,11 +38,6 @@ public class VendaBean {
 	public List<Item> getListaItens() {
 		return listaItens;
 	}
-	
-	
-
-	
-
 
 	public void setListaItens(List<Item> listaItens) {
 		this.listaItens = listaItens;
@@ -60,12 +58,10 @@ public class VendaBean {
 	public List<Produto> getListaProdutosFiltrados() {
 		return listaProdutosFiltrados;
 	}
-	
-	
 
 	public Venda getVendaCadastro() {
-		
-		if(vendaCadastro==null){
+
+		if (vendaCadastro == null) {
 			this.vendaCadastro = new Venda();
 			this.vendaCadastro.setValor(new BigDecimal("0.00"));
 		}
@@ -74,6 +70,14 @@ public class VendaBean {
 
 	public void setVendaCadastro(Venda vendaCadastro) {
 		this.vendaCadastro = vendaCadastro;
+	}
+
+	public autenticacaoBean getAutenticacaoBean() {
+		return autenticacaoBean;
+	}
+
+	public void setAutenticacaoBean(autenticacaoBean autenticacaoBean) {
+		this.autenticacaoBean = autenticacaoBean;
 	}
 
 	public void setListaProdutosFiltrados(List<Produto> listaProdutosFiltrados) {
@@ -134,43 +138,44 @@ public class VendaBean {
 		}
 
 		if (posicaoEncontrada > -1) {
-			vendaCadastro.setValor(vendaCadastro.getValor().subtract(listaItens.get(posicaoEncontrada).getValor()));		
+			vendaCadastro.setValor(vendaCadastro.getValor().subtract(listaItens.get(posicaoEncontrada).getValor()));
 			listaItens.remove(posicaoEncontrada);
-			
+
 		}
 	}
-	
-	public void carregarDadosVenda(){
+
+	public void carregarDadosVenda() {
 		vendaCadastro.setHorario(new Date());
-		
+
 		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-		this.vendaCadastro.setFuncionario(funcionarioDAO.buscarPorCodigo(1L)); 
-		
+		this.vendaCadastro
+				.setFuncionario(funcionarioDAO.buscarPorCodigo(autenticacaoBean.getFuncionarioLogado().getCodigo()));
+
 		RequestContext req = RequestContext.getCurrentInstance();
 		req.execute("PF('wvdlgFinalizarVenda').show();");
-		
+
 	}
-	
-	public void salvar(){
-	try {
-	VendaDAO vendaDAO = new VendaDAO();
-	Long codigoVenda = vendaDAO.salvar(vendaCadastro);
-	Venda vendaFK = vendaDAO.buscarPorCodigo(codigoVenda);
-	
-	for(Item item:listaItens){
-		item.setVenda(vendaFK);
-		ItemDAO itemDAO  = new ItemDAO();
-		itemDAO.salvar(item);
-	}
-		
-	vendaCadastro = new Venda();
-	vendaCadastro.setValor(new BigDecimal("0.00"));
-	this.listaItens.clear();
-	
-	FacesUtil.adicionarMsgInfo("Venda salva com sucesso!!!");
-	} catch (Exception e) {
-		FacesUtil.adicionarMsgError("Não foi possivel salvar a venda " + e.getMessage());
-	}
+
+	public void salvar() {
+		try {
+			VendaDAO vendaDAO = new VendaDAO();
+			Long codigoVenda = vendaDAO.salvar(vendaCadastro);
+			Venda vendaFK = vendaDAO.buscarPorCodigo(codigoVenda);
+
+			for (Item item : listaItens) {
+				item.setVenda(vendaFK);
+				ItemDAO itemDAO = new ItemDAO();
+				itemDAO.salvar(item);
+			}
+
+			vendaCadastro = new Venda();
+			vendaCadastro.setValor(new BigDecimal("0.00"));
+			this.listaItens.clear();
+
+			FacesUtil.adicionarMsgInfo("Venda salva com sucesso!!!");
+		} catch (Exception e) {
+			FacesUtil.adicionarMsgError("Não foi possivel salvar a venda " + e.getMessage());
+		}
 	}
 
 }
