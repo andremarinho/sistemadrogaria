@@ -36,8 +36,25 @@
 
 			</h:panelGrid>
 
-			<p:dataTable emptyMessage="Nenhum resgistro encontrado"
-				value="#{produtoBean.listaProdutos}" var="produto" filteredValue="#{produtoBean.listaProdutosFiltrados}">
+			<p:dataTable id="tbl_produtos"
+				emptyMessage="Nenhum resgistro encontrado"
+				value="#{produtoBean.listaProdutos}" var="produto"
+				filteredValue="#{produtoBean.listaProdutosFiltrados}">
+
+
+				
+
+				<f:facet name="header">
+					<p:outputLabel value="Exportar para Excel: "/>
+					<h:commandLink>
+						<p:graphicImage library="images" name="excel.png" width="24" />
+						<p:dataExporter type="xls" target="tbl_produtos"
+							fileName="produtos" />
+					</h:commandLink>
+
+
+				</f:facet>
+
 
 				<p:column headerText="Código:" style="width:7%;">
 					<p:outputLabel value="#{produto.codigo}"></p:outputLabel>
