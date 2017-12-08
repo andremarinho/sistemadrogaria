@@ -39,7 +39,7 @@ public class autenticacaoBean {
 		this.funcionarioLogado = funcionarioLogado;
 	}
 
-	public void autenticar() {
+	public String autenticar() {
 
 		try {
 
@@ -49,17 +49,18 @@ public class autenticacaoBean {
 			
 			if (funcionarioLogado.getFuncao() == null) {
 				FacesUtil.adicionarMsgError("Credenciais incorretas");
-				
+				return null;
 				
 			} else {
 				FacesUtil.adicionarMsgInfo("Usuario logado com sucesso!!! "+funcionarioLogado.getNome());
-				
+				return "/pages/principal.xhtml?faces-redirect=true";
 			}
 
-			this.mnTeste = false;
+			
 			
 		} catch (Exception e) {
 			FacesUtil.adicionarMsgError("Erro ao tentar autenticar no sistema. " + e.getMessage());
+			return null;
 		}
 	}
 	
