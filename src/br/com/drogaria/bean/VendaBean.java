@@ -28,7 +28,7 @@ public class VendaBean {
 	private Venda vendaCadastro;
 
 	@ManagedProperty(value = "#{autenticacaoBean}")
-	private autenticacaoBean autenticacaoBean;
+	private AutenticacaoBean autenticacaoBean;
 
 	private List<Produto> listaProdutos;
 	private List<Produto> listaProdutosFiltrados;
@@ -72,11 +72,11 @@ public class VendaBean {
 		this.vendaCadastro = vendaCadastro;
 	}
 
-	public autenticacaoBean getAutenticacaoBean() {
+	public AutenticacaoBean getAutenticacaoBean() {
 		return autenticacaoBean;
 	}
 
-	public void setAutenticacaoBean(autenticacaoBean autenticacaoBean) {
+	public void setAutenticacaoBean(AutenticacaoBean autenticacaoBean) {
 		this.autenticacaoBean = autenticacaoBean;
 	}
 

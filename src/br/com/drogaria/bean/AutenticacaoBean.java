@@ -11,7 +11,7 @@ import br.com.drogaria.util.FacesUtil;
 
 @ManagedBean
 @SessionScoped
-public class autenticacaoBean {
+public class AutenticacaoBean {
 
 	private Funcionario funcionarioLogado;
 	
