@@ -42,7 +42,8 @@
 
 				<p:outputLabel value="Preço: "></p:outputLabel>
 
-				<p:inputText value="#{produtoBean.produtoCadastro.preco}">
+				<p:inputText value="#{produtoBean.produtoCadastro.preco}" converterMessage="O campo preço só aceita numeros.">
+					<f:convertNumber/>
 					<f:validateBean />
 				</p:inputText>
 
@@ -60,6 +61,7 @@
 					<f:selectItem itemValue="" itemLabel="Selecione um fabricante"></f:selectItem>
 					<f:selectItems value="#{produtoBean.listaFabricantes}"
 						var="fabricante" itemLabel="#{fabricante.descricao}"></f:selectItems>
+						
 						<f:validateBean/>
 				</p:selectOneMenu>
 
