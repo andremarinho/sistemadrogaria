@@ -43,7 +43,7 @@
 
 				<p:column headerText="Preço:" filterBy="#{produto.preco}"
 					style="width:10%;">
-					<p:outputLabel value="#{produto.preco}"></p:outputLabel>
+					<p:outputLabel value="R$ #{produto.preco}"></p:outputLabel>
 				</p:column>
 
 				<p:column headerText="Qtde:" filterBy="#{produto.quantidade}"
@@ -59,7 +59,7 @@
 				<p:column style="width: 15%;" headerText="Opções:">
 					<p:commandButton value="Adcionar"
 						actionListener="#{vendaBean.selecionar(produto)}"
-						update=":fr_selecionados :txt_total"></p:commandButton>
+						update=":fr_selecionados "></p:commandButton>
 				</p:column>
 
 			</p:dataTable>
@@ -77,13 +77,23 @@
 					<p:outputLabel value="#{item.produto.descricao}"></p:outputLabel>
 				</p:column>
 
-				<p:column headerText="Quantidade:">
+				<p:column headerText="Quantidade:" footerText=" Qtd. Total: #{vendaBean.vendaCadastro.quantidade}">
 					<p:outputLabel value="#{item.quantidade}"></p:outputLabel>
 
 				</p:column>
 
 				<p:column headerText="Valor Parcial:">
-					<p:outputLabel value="#{item.valor}"></p:outputLabel>
+					<f:facet name="footer">
+						<p:outputLabel value="Valor Total: R$ " />
+						<p:outputLabel value="#{vendaBean.vendaCadastro.valor}">
+							<f:convertNumber></f:convertNumber>
+						</p:outputLabel>
+
+
+					</f:facet>
+					<p:outputLabel value=" R$#{item.valor}">
+						<f:convertNumber />
+					</p:outputLabel>
 				</p:column>
 
 
@@ -91,7 +101,7 @@
 				<p:column style="width: 15%;" headerText="Opções:">
 					<p:commandButton value="Remover"
 						actionListener="#{vendaBean.remover(item)}"
-						update=":fr_selecionados :txt_total"></p:commandButton>
+						update=":fr_selecionados "></p:commandButton>
 				</p:column>
 
 			</p:dataTable>
@@ -140,15 +150,15 @@
 						<h:outputText value="#{vendaBean.vendaCadastro.valor}" />
 						<p:commandButton value="Voltar" />
 						<p:commandButton value="Salvar"
-							actionListener="#{vendaBean.salvar}" update=":msgGlobal :fr_selecionados :txt_total"
+							actionListener="#{vendaBean.salvar}"
+							update=":msgGlobal :fr_selecionados "
 							oncomplete="PF('wvdlgFinalizarVenda').hide();" />
 					</h:panelGrid>
 				</h:form>
 			</p:dialog>
 
 
-			<h:outputText id="txt_total"
-				value="Valor Total: #{vendaBean.vendaCadastro.valor}" />
+
 
 
 			<p:commandButton value="Finalizar Venda"

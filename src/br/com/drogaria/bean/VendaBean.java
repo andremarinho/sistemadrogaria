@@ -64,6 +64,7 @@ public class VendaBean {
 		if (vendaCadastro == null) {
 			this.vendaCadastro = new Venda();
 			this.vendaCadastro.setValor(new BigDecimal("0.00"));
+			this.vendaCadastro.setQuantidade(0);
 		}
 		return vendaCadastro;
 	}
@@ -123,6 +124,7 @@ public class VendaBean {
 		}
 
 		vendaCadastro.setValor(vendaCadastro.getValor().add(produto.getPreco()));
+		vendaCadastro.setQuantidade(vendaCadastro.getQuantidade()+1);
 	}
 
 	public void remover(Item item) {
@@ -139,6 +141,7 @@ public class VendaBean {
 
 		if (posicaoEncontrada > -1) {
 			vendaCadastro.setValor(vendaCadastro.getValor().subtract(listaItens.get(posicaoEncontrada).getValor()));
+			vendaCadastro.setQuantidade(vendaCadastro.getQuantidade()-item.getQuantidade());
 			listaItens.remove(posicaoEncontrada);
 
 		}
