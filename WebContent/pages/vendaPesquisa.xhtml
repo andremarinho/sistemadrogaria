@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+
+<ui:composition template="/template/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="fabacao" value="#{fabricanteBean.acao}"></f:viewParam>
+			<f:viewParam name="fabcod" value="#{fabricanteBean.codigo}"></f:viewParam>
+			<f:event listener="#{fabricanteBean.carregarFabricante}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+	</ui:define>
+	<ui:define name="conteudo">
+
+
+
+		<p:toolbar>
+			<f:facet name="left">
+				<p:outputLabel value="Vendas pesquisa" />
+			</f:facet>
+
+		</p:toolbar>
+
+		<h:form>
+			<p:panelGrid columns="5">
+				<p:outputLabel value="Data Inicial: " />
+				<p:calendar value="#{vendaBean.filtro.dataInicial}" />
+
+				<p:outputLabel value="Data Final: " />
+				<p:calendar value="#{vendaBean.filtro.dataFinal}" />
+				<p:commandButton value="Buscar" />
+			</p:panelGrid>
+		</h:form>
+
+
+
+
+
+	</ui:define>
+
+
+
+
+
+</ui:composition>
+
+</html>

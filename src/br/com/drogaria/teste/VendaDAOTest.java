@@ -69,6 +69,7 @@ public class VendaDAOTest {
 	
 	
 	@Test
+	@Ignore
 	public void listarPorData() throws ParseException{
 		
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");

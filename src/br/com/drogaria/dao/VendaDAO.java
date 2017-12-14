@@ -115,7 +115,7 @@ public class VendaDAO {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT venda FROM VENDA venda ");
+		sql.append("SELECT venda FROM Venda venda ");
 		
 		if(filtro.getDataInicial() != null && filtro.getDataFinal() != null){
 			sql.append("WHERE venda.horario BETWEEN :dataInicial AND :dataFinal ");

@@ -19,6 +19,7 @@ import br.com.drogaria.domain.Funcionario;
 import br.com.drogaria.domain.Item;
 import br.com.drogaria.domain.Produto;
 import br.com.drogaria.domain.Venda;
+import br.com.drogaria.filter.VendaFilter;
 import br.com.drogaria.util.FacesUtil;
 
 @ManagedBean
@@ -26,12 +27,43 @@ import br.com.drogaria.util.FacesUtil;
 public class VendaBean {
 
 	private Venda vendaCadastro;
+	
+	private VendaFilter filtro;
+	private List<Venda> listaVendasFiltradas;
+	
 
 	@ManagedProperty(value = "#{autenticacaoBean}")
 	private AutenticacaoBean autenticacaoBean;
 
 	private List<Produto> listaProdutos;
 	private List<Produto> listaProdutosFiltrados;
+	
+	
+	
+	
+
+	public List<Venda> getListaVendasFiltradas() {
+		return listaVendasFiltradas;
+	}
+
+	public void setListaVendasFiltradas(List<Venda> listaVendasFiltradas) {
+		this.listaVendasFiltradas = listaVendasFiltradas;
+	}
+
+	public VendaFilter getFiltro() {
+		if(this.filtro == null){
+			this.filtro = new VendaFilter();
+		}
+		
+		return filtro;
+	}
+
+	public void setFiltro(VendaFilter filtro) {
+		if(filtro==null){
+			this.filtro = new VendaFilter();
+		}
+		this.filtro = filtro;
+	}
 
 	private List<Item> listaItens;
 
@@ -178,6 +210,24 @@ public class VendaBean {
 			FacesUtil.adicionarMsgInfo("Venda salva com sucesso!!!");
 		} catch (Exception e) {
 			FacesUtil.adicionarMsgError("Não foi possivel salvar a venda " + e.getMessage());
+		}
+	}
+	
+	public void buscar(){
+		
+		
+		try {
+			
+			VendaDAO vendaDAO = new VendaDAO();
+			this.listaVendasFiltradas = vendaDAO.buscar(filtro);
+			
+			for(Venda venda: listaVendasFiltradas){
+				System.out.println(venda);
+			}
+			
+			
+		}  catch (Exception e) {
+			FacesUtil.adicionarMsgError("Erro ao tentar buscar uma venda " + e.getMessage());
 		}
 	}
 
