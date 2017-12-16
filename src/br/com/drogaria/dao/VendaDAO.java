@@ -19,7 +19,7 @@ public class VendaDAO {
 
 		try {
 			transacao = session.beginTransaction();
-			codigo = (long)session.save(venda);
+			codigo = (long) session.save(venda);
 			transacao.commit();
 		} catch (Exception e) {
 
@@ -31,7 +31,7 @@ public class VendaDAO {
 		} finally {
 			session.close();
 		}
-		
+
 		return codigo;
 	}
 
@@ -68,7 +68,7 @@ public class VendaDAO {
 
 		return venda;
 	}
-	
+
 	public void excluir(Venda venda) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao = null;
@@ -88,7 +88,7 @@ public class VendaDAO {
 			session.close();
 		}
 	}
-	
+
 	public void editar(Venda venda) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao = null;
@@ -108,36 +108,40 @@ public class VendaDAO {
 			session.close();
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Venda> buscar(VendaFilter filtro){
+	public List<Venda> buscar(VendaFilter filtro) {
 		List<Venda> vendas = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		
+
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT venda FROM Venda venda ");
-		
-		if(filtro.getDataInicial() != null && filtro.getDataFinal() != null){
+
+		if (filtro.getDataInicial() != null && filtro.getDataFinal() != null) {
 			sql.append("WHERE venda.horario BETWEEN :dataInicial AND :dataFinal ");
 		}
-		
+
 		sql.append("ORDER BY venda.horario ");
-		
+
 		try {
-			
+
 			Query consulta = session.createQuery(sql.toString());
-			consulta.setDate("dataInicial", filtro.getDataInicial());
-			consulta.setDate("dataFinal", filtro.getDataFinal());
-			
+
+			if (filtro.getDataInicial() != null && filtro.getDataFinal() != null) {
+				
+				consulta.setDate("dataInicial", filtro.getDataInicial());
+				consulta.setDate("dataFinal", filtro.getDataFinal());
+
+			}
+
 			vendas = consulta.list();
 		} catch (Exception e) {
 			throw e;
 		} finally {
 			session.close();
 		}
-		
+
 		return vendas;
 	}
-	
 
 }

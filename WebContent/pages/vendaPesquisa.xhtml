@@ -37,9 +37,48 @@
 
 				<p:outputLabel value="Data Final: " />
 				<p:calendar value="#{vendaBean.filtro.dataFinal}" />
-				<p:commandButton value="Buscar" />
+				<p:commandButton value="Buscar" actionListener="#{vendaBean.buscar}"
+					update=":msgGlobal :dt_vendas" />
 			</p:panelGrid>
 		</h:form>
+
+
+		<p:dataTable emptyMessage="Nenhum resgistro encontrado" id="dt_vendas"
+			value="#{vendaBean.listaVendasFiltradas}" var="venda" rows="10"
+			paginator="true">
+
+
+
+			<p:column headerText="Código:" width="10%">
+				<h:outputLabel value="#{venda.codigo}" />
+			</p:column>
+			
+			<p:column headerText="Vendedor" width="45%">
+			
+			<p:outputLabel value="#{venda.funcionario.nome}" />
+			</p:column>
+
+			<p:column headerText="Data:" width="15%">
+				<h:outputLabel value="#{venda.horario}">
+
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm"></f:convertDateTime>
+				</h:outputLabel>
+
+			</p:column>
+
+			<p:column headerText="Valor">
+
+				<p:outputLabel value="R$ #{venda.valor}" >
+				
+				<f:convertNumber/>
+				</p:outputLabel>
+
+
+			</p:column>
+
+
+
+		</p:dataTable>
 
 
 

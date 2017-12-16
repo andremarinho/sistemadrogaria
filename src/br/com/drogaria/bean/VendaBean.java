@@ -221,9 +221,7 @@ public class VendaBean {
 			VendaDAO vendaDAO = new VendaDAO();
 			this.listaVendasFiltradas = vendaDAO.buscar(filtro);
 			
-			for(Venda venda: listaVendasFiltradas){
-				System.out.println(venda);
-			}
+			
 			
 			
 		}  catch (Exception e) {
