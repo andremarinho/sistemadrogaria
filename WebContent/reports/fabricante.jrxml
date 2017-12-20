@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.0.final using JasperReports Library version 6.5.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fabricante" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="326c8448-e8dd-494d-be0f-b3acc0e88c12">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[ZGJfZHJvZ2FyaWEudGJsX2ZhYnJpY2FudGUgQVMgLDExNSw4NixkMDlmMmI3Mi1mMDE2LTRhMTQt
+OWZiZS1lOTA3M2QyZTk4MjA7
+]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="drogaria Data Adapter "/>
+	<queryString language="SQL">
+		<![CDATA[SELECT db_drogaria.tbl_fabricante.fab_codigo,
+	db_drogaria.tbl_fabricante.fab_descricao
+FROM db_drogaria.tbl_fabricante]]>
+	</queryString>
+	<field name="fab_codigo" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="fab_codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tbl_fabricante"/>
+	</field>
+	<field name="fab_descricao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fab_descricao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tbl_fabricante"/>
+	</field>
+	<group name="fab_descricao">
+		<groupExpression><![CDATA[$F{fab_descricao}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
