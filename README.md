@@ -6,11 +6,12 @@ O objetivo dessa aplicação é servir como conteúdo no estudo de desenvolvimen
 
 Detalhes da implementação
 
-Tecnologias utilizadas na implementação:
-
-    Primefaces: extensão do JSF, disponibiliza uma série de componentes visuais iterativos. Sua proposta é acelerar o desenvolvimento Web, com foco em qualidade e eficiência em interfaces gráfica;
-    JSF 2: utilizamos o framework JavaServer Faces, seguindo o modelo arquitetural MVC e o uso de componentes visuais para a construção das interfaces gráficas (front-end);
+<h2>Tecnologias utilizadas na implementação:</h2>
+<ul>
+    <li>Primefaces: extensão do JSF, disponibiliza uma série de componentes visuais iterativos. Sua proposta é acelerar o desenvolvimento Web, com foco em qualidade e eficiência em interfaces gráfica;</li>
+    <li>JSF 2: utilizamos o framework JavaServer Faces, seguindo o modelo arquitetural MVC e o uso de componentes visuais para a construção das interfaces gráficas (front-end);</li>
+    <li>JPA: API alto nível, padrão da tecnologia Java, para definir o mapeamento objeto relacional (ORM);</li>
+    <li>Hibernate: provedor JPA, responsável por resolver ORM;</li>
     
-    JPA: API alto nível, padrão da tecnologia Java, para definir o mapeamento objeto relacional (ORM);
-    Hibernate: provedor JPA, responsável por resolver ORM;
-    Bean Validation: mecanismo padrão do Java para determinar regras de validação através de anotações;
+   <li> Bean Validation: mecanismo padrão do Java para determinar regras de validação através de anotações;</li>
+</ul>
