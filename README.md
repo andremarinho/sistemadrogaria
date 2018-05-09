@@ -22,7 +22,6 @@ Detalhes da implementação
     <li> JDK - versão 1.8 do Java, ou mais recente;</li>
    <li> Eclipse - recomendamos o Eclipse IDE- Eclipse Java EE IDE for Web Developers.-Version: Mars.2 Release (4.5.2);</li>
     <li>Plugin para Eclipse - JBoss Tools;</li>
-    <li>Maven - para build e dependências.</li>
-    <li>Application Server Java EE - JBoss AS 6 ou 7 (EAP);</li>
+    <li>Application Server Java EE - TomCat 7;</li>
     <li>MySQL - versão 5 ou mais recente;</li>
 </ul>
