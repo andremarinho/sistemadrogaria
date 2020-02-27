@@ -25,3 +25,13 @@ Detalhes da implementação
     <li>Application Server Java EE - TomCat 7;</li>
     <li>MySQL - versão 5 ou mais recente;</li>
 </ul>
+
+<h2>Funcionalidades</h2>
+
+<ul>
+    <li> Cadastro de medicamento</li>
+   <li> Cadastro de Fornecedor</li>
+    <li>Cadastro de cliente</li>
+    <li>Tela de venda de medicamento</li>
+    <li>Tela de login</li>
+</ul>
